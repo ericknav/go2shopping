@@ -11,6 +11,8 @@
 |
 */
 
+$router->post('/users/login',['uses'=>'UsersController@getToken']);
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
@@ -31,6 +33,7 @@ $router->get('/user[/{id}]', function ($id=null) {
 });
 
 
+//$router->group(['middleware' => ['auth']], function () use ($router) {
 //$router->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], function () use ($router) {
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
