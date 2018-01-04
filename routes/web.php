@@ -37,6 +37,9 @@ $router->get('/user[/{id}]', function ($id=null) {
 //$router->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], function () use ($router) {
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
+	$router->get('categoryList', ['as' => 'categoryList', 'uses' => 'CategoryController@getList']);
+	$router->get('category', ['as' => 'category', 'uses' => 'CategoryController@get']);
+
 	$router->get('product', ['as' => 'product', 'uses' => 'ProductController@index']);
 	$router->post('product', ['as' => 'product', 'uses' => 'ProductController@post']);
 });
