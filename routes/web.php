@@ -32,7 +32,7 @@ $router->get('/user[/{id}]', function ($id=null) {
     return 'User '.$id;
 });
 
-
+//$route->version('v1',[],function($router){});
 //$router->group(['middleware' => ['auth']], function () use ($router) {
 //$router->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], function () use ($router) {
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
