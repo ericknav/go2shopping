@@ -8,11 +8,44 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $result = DB::select("CALL getLanguage()");
-        //return "Product";
-        return response()->json($result, 200);
-        //return response()->json([], status:200);
-        //return response()->json([], status:201);
+        try
+        {
+            $result = DB::select("CALL getLanguage()");
+            //return "Product";
+            return response()->json($result, 200);
+            //return response()->json([], status:200);
+            //return response()->json([], status:201);
+        } 
+        catch(ModelNotFoundException $e)
+        {
+            return response()->json(['error' => 'No content.'],406);
+        }
+    }
+
+    public function getList($id)
+    {
+        try
+        {
+            $result = DB::select("CALL getProductList(?)",[$id]);
+            return response()->json($result, 200);
+        } 
+        catch(ModelNotFoundException $e)
+        {
+            return response()->json(['error' => 'No content.'],406);
+        }
+    }
+
+    public function get($id)
+    {
+        try
+        {
+            $result = DB::select("CALL getProduct(?)",[$id]);
+            return response()->json($result, 200);
+        } 
+        catch(ModelNotFoundException $e)
+        {
+            return response()->json(['error' => 'No content.'],406);
+        }
     }
 
     public function post()

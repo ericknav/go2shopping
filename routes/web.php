@@ -35,11 +35,22 @@ $router->get('/user[/{id}]', function ($id=null) {
 //$route->version('v1',[],function($router){});
 //$router->group(['middleware' => ['auth']], function () use ($router) {
 //$router->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], function () use ($router) {
-$router->group(['prefix' => 'api/v1'], function () use ($router) {
+$router->group(['prefix' => 'api/v1'], function ($id=null) use ($router) {
 
 	$router->get('categoryList', ['as' => 'categoryList', 'uses' => 'CategoryController@getList']);
-	$router->get('category', ['as' => 'category', 'uses' => 'CategoryController@get']);
+	$router->get('category[/{id}]', ['as' => 'category', 'uses' => 'CategoryController@get']);
 
-	$router->get('product', ['as' => 'product', 'uses' => 'ProductController@index']);
-	$router->post('product', ['as' => 'product', 'uses' => 'ProductController@post']);
+	$router->get('mallList', ['as' => 'mallList', 'uses' => 'MallController@getList']);
+	$router->get('mall[/{id}]', ['as' => 'mall', 'uses' => 'MallController@get']);
+
+	$router->get('productList[/{id}]', ['as' => 'productList', 'uses' => 'ProductController@getList']);
+	$router->post('product[/{id}]', ['as' => 'product', 'uses' => 'ProductController@get']);
+
+	//$router->get('product', ['as' => 'product', 'uses' => 'ProductController@index']);
+	//$router->post('product', ['as' => 'product', 'uses' => 'ProductController@post']);
+});
+
+$router->group(['middleware' => ['auth']], function () use ($router) {
+	//$router->get('mallList', ['as' => 'mallList', 'uses' => 'MallController@getList']);
+	//$router->get('mall[/{id}]', ['as' => 'mall', 'uses' => 'MallController@get']);
 });

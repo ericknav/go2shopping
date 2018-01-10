@@ -25,8 +25,8 @@ $app = new Laravel\Lumen\Application(
 
 // By Erick
 $app->withFacades();
-
-//$app->withEloquent();
+// by Erick
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +81,10 @@ $app->routeMiddleware([
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+
+// By Erick
+$app->register(App\Providers\AuthServiceProvider::class);
+
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*
