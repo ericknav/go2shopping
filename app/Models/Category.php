@@ -8,12 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 
 final class Category extends Model
 {
+	
+	
 	// *** Custom name connection ***
 	// protected $connection = 'connection-name';
 
 	// *** Custom name table ***
 	// protected $table = "Category";
+	protected $table = "CNF_CATALOG";
 	
+	// *** Custom primary key ***
+	// protected $primaryKey = "idCatory";
+	protected $primaryKey = "catalogId";
+
 	// *** Primary key is no increment ***
 	// public $incrementing = false;
 
@@ -26,4 +33,19 @@ final class Category extends Model
 
 	// *** Defined my format ***
 	protected $dateFormat = 'U';
+
+	/**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+	/*
+    protected $fillable = [
+        'categoryId', 'categoryCode', 'categoryName',
+	];
+	//*/
+
+	protected $fillable = [
+        'catalogId', 'name', 'description',
+	];
 }

@@ -3,18 +3,15 @@
 namespace App\Http\Controllers;
 use DB;
 use Log;
-//use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class MallController extends Controller
 {
     public function getList()
     {
         try
         {
-            //Log::info('Show all categories.');
-            $result = DB::select("CALL getCategoryList()");
-            //$result = Category::all();
+            $result = DB::select("CALL getMallList(?)",[0]);
             return response()->json($result, 200);
         } 
         catch(ModelNotFoundException $e)
@@ -27,8 +24,7 @@ class CategoryController extends Controller
     {
         try
         {
-            // Log::info('Get category id: '.$id);
-            $result = DB::select("CALL getCategory(?)",[$id]);
+            $result = DB::select("CALL getMall(?)",[$id]);
             return response()->json($result, 200);
         } 
         catch(ModelNotFoundException $e)
