@@ -7,6 +7,23 @@ use Illuminate\Http\Request;
 
 class MallController extends Controller
 {
+    public function get($mallId=0)
+    {
+        try
+        {
+            $result = DB::select("CALL getMall(?)",[$mallId]);
+            return response()->json($result, 200);
+        } 
+        catch(ModelNotFoundException $e)
+        {
+            return response()->json(['Error' => 'No content.'+$e->getMessage()],406);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['Error' => 'Message: '.$e->getMessage()],400);
+        }
+    }
+
     public function getList()
     {
         try
@@ -16,20 +33,11 @@ class MallController extends Controller
         } 
         catch(ModelNotFoundException $e)
         {
-            return response()->json(['error' => 'No content.'],406);
+            return response()->json(['Error' => 'No content.'+$e->getMessage()],406);
         }
-    }
-
-    public function get($id)
-    {
-        try
+        catch(Exception $e)
         {
-            $result = DB::select("CALL getMall(?)",[$id]);
-            return response()->json($result, 200);
-        } 
-        catch(ModelNotFoundException $e)
-        {
-            return response()->json(['error' => 'No content.'],406);
+            return response()->json(['Error' => 'Message: '.$e->getMessage()],400);
         }
     }
 }

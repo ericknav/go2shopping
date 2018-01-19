@@ -6,45 +6,54 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function get($productId=0)
     {
         try
         {
-            $result = DB::select("CALL getLanguage()");
-            //return "Product";
+            $result = DB::select("CALL getProduct(?)",[$productId]);
             return response()->json($result, 200);
-            //return response()->json([], status:200);
-            //return response()->json([], status:201);
         } 
         catch(ModelNotFoundException $e)
         {
-            return response()->json(['error' => 'No content.'],406);
+            return response()->json(['Error' => 'No content.'+$e->getMessage()],406);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['Error' => 'Message: '.$e->getMessage()],400);
         }
     }
 
-    public function getList($id)
+    public function getList($categoryId=0)
     {
         try
         {
-            $result = DB::select("CALL getProductList(?)",[$id]);
+            $result = DB::select("CALL getProductList(?)",[$categoryId]);
             return response()->json($result, 200);
         } 
         catch(ModelNotFoundException $e)
         {
-            return response()->json(['error' => 'No content.'],406);
+            return response()->json(['Error' => 'No content.'+$e->getMessage()],406);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['Error' => 'Message: '.$e->getMessage()],400);
         }
     }
 
-    public function get($id)
+    public function getCustomList($mallId=0,$categoryId=0,$productId=0)
     {
         try
         {
-            $result = DB::select("CALL getProduct(?)",[$id]);
+            $result = DB::select("CALL getMallProductList(?,?,?)",[$mallId,$categoryId,$productId]);
             return response()->json($result, 200);
         } 
         catch(ModelNotFoundException $e)
         {
-            return response()->json(['error' => 'No content.'],406);
+            return response()->json(['Error' => 'No content.'+$e->getMessage()],406);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['Error' => 'Message: '.$e->getMessage()],400);
         }
     }
 
