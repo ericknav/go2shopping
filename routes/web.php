@@ -14,9 +14,6 @@
 /*
 $router->post('/users/login',['uses'=>'UsersController@getToken']);
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
 
 $router->get('/key', function() use ($router){
 	//return str_random(length:32);
@@ -32,6 +29,11 @@ $router->get('/user[/{id}]', function ($id=null) {
     return 'User '.$id;
 });
 */
+
+$router->get('/', function () use ($router) {
+	//return $router->app->version();
+	return "";
+});
 
 //$route->version('v1',[],function($router){});
 //$router->group(['middleware' => ['auth']], function () use ($router) {
