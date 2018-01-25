@@ -25,4 +25,10 @@ $app = require __DIR__.'/../bootstrap/app.php';
 |
 */
 
+// By Erick (not found page redirect to index)
+// $app->run($app->make('request'));
+
 $app->run();
+
+
+
